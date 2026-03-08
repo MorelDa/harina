@@ -7,33 +7,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
-        body { background:#030508; color:#fff; font-family:'Outfit',sans-serif; }
-        .bg { position:fixed; inset:0; background: linear-gradient(to bottom, rgba(3,5,8,0.5), #030508), url('https://media.themoviedb.org/t/p/w300_and_h450_multi_faces_filter(blur)/aqW5UWQ2M13lQWVrGNrUzs3hn2x.jpg') center/cover; z-index:-1; filter: blur(15px); transform: scale(1.2); }
+        body { background:#030508; color:#fff; font-family:'Outfit',sans-serif; overflow-x:hidden; }
+        .bg { position:fixed; inset:0; background: linear-gradient(to bottom, rgba(3,5,8,0.7), #030508), url('https://media.themoviedb.org/t/p/w300_and_h450_multi_faces_filter(blur)/aqW5UWQ2M13lQWVrGNrUzs3hn2x.jpg') center/cover; z-index:-1; filter: blur(20px); transform: scale(1.2); }
         .content { padding: 40px 20px; max-width: 1200px; margin: auto; }
-        h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
-        .desc { color:rgba(255,255,255,0.6); font-size:14px; margin-bottom:30px; line-height:1.4; border-left:3px solid #00f2ff; padding-left:15px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-        .ep-card { background:rgba(255,255,255,0.05); border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .ep-card:active { transform: scale(0.95); }
-        .ep-thumb { position:relative; aspect-ratio:16/9; }
-        .ep-thumb img { width:100%; height:100%; object-fit:cover; }
-        .play-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; }
-        .ep-info { padding:10px; }
-        .ep-info h3 { font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        #player { display:none; position:fixed; inset:0; background:#000; z-index:99; flex-direction:column; }
-        #player.active { display:flex; }
-        .p-bar { padding:15px; display:flex; justify-content:space-between; align-items:center; background:#111; }
-        iframe { flex-grow:1; border:none; }
-        .btn-c { background:#00f2ff; color:#000; padding:5px 15px; border-radius:20px; font-weight:900; border:none; }
+        h1 { font-size: 3rem; font-weight: 900; margin-bottom: 10px; color: #00f2ff; }
+        .desc { color:rgba(255,255,255,0.7); line-height:1.6; margin-bottom: 40px; max-width: 800px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .ep-card { background: rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden; cursor: pointer; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+        .ep-card:hover { transform: translateY(-5px); border-color: #00f2ff; }
+        .ep-thumb { position: relative; aspect-ratio: 16/9; }
+        .ep-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .play-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .ep-card:hover .play-overlay { opacity: 1; }
+        .play-overlay span { font-size: 2rem; color: #00f2ff; }
+        .ep-info { padding: 12px; }
+        .ep-info h3 { font-size: 0.9rem; margin-bottom: 4px; }
+        .ep-info p { font-size: 0.7rem; color: #00f2ff; font-weight: bold; }
+        #player { position: fixed; inset: 0; background: #000; z-index: 100; display: none; flex-direction: column; }
+        #player.active { display: flex; }
+        .p-bar { padding: 15px; background: #111; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+        .btn-c { background: #ff4d4d; color: #fff; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        iframe { flex-grow: 1; border: none; width: 100%; height: 100%; }
     </style>
 </head>
 <body>
     <div class="bg"></div>
     <div class="content">
         <h1>Harina</h1>
-        <div class="desc">El Teniente y Ramírez se enfrentan con un "serial killer", cuyo objetivo es terminar con los "influencers". Buscarán atrapar al criminal batallando al mismo tiempo con el sistema judicial mexicano.</div>
+        <p class="desc">El Teniente y Ramírez se enfrentan con un "serial killer", cuyo objetivo es terminar con los "influencers". Buscarán atrapar al criminal batallando al mismo tiempo con el sistema judicial mexicano.</p>
         <div class="grid">
-                <div class="ep-card" onclick="play('Episodio 1','<iframe    src="https://vimeos.net/embed-z53zoxmlyfcp.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 1','https://vimeos.net/embed-z53zoxmlyfcp.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -43,7 +46,7 @@
                         <p>Disponible HD</p>
                     </div>
                 </div>
-                <div class="ep-card" onclick="play('Episodio 2','<iframe    src="https://vimeos.net/embed-yr3128eg42qf.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 2','https://vimeos.net/embed-yr3128eg42qf.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -53,7 +56,7 @@
                         <p>Disponible HD</p>
                     </div>
                 </div>
-                <div class="ep-card" onclick="play('Episodio 3','<iframe    src="https://vimeos.net/embed-9quz2bda5eaf.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 3','https://vimeos.net/embed-9quz2bda5eaf.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -63,7 +66,7 @@
                         <p>Disponible HD</p>
                     </div>
                 </div>
-                <div class="ep-card" onclick="play('Episodio 4','<iframe    src="https://vimeos.net/embed-ebk1xtinjgh3.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 4','https://vimeos.net/embed-ebk1xtinjgh3.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -73,7 +76,7 @@
                         <p>Disponible HD</p>
                     </div>
                 </div>
-                <div class="ep-card" onclick="play('Episodio 5','<iframe    src="https://vimeos.net/embed-fiksmg2jldps.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 5','https://vimeos.net/embed-fiksmg2jldps.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -83,7 +86,7 @@
                         <p>Disponible HD</p>
                     </div>
                 </div>
-                <div class="ep-card" onclick="play('Episodio 6','<iframe    src="https://vimeos.net/embed-3vw8zyy886gf.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 6','https://vimeos.net/embed-3vw8zyy886gf.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -93,7 +96,7 @@
                         <p>Disponible HD</p>
                     </div>
                 </div>
-                <div class="ep-card" onclick="play('Episodio 7','<iframe    src="https://vimeos.net/embed-sfmseclpqyay.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 7','https://vimeos.net/embed-sfmseclpqyay.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -103,7 +106,7 @@
                         <p>Disponible HD</p>
                     </div>
                 </div>
-                <div class="ep-card" onclick="play('Episodio 8','<iframe    src="https://vimeos.net/embed-9gkrb8qu30z7.html"    width="100%"    height="480"    frameborder="0"    sandbox="allow-scripts allow-same-origin allow-presentation"    allowfullscreen> </iframe>')">
+                <div class="ep-card" onclick="play('Episodio 8','https://vimeos.net/embed-9gkrb8qu30z7.html')">
                     <div class="ep-thumb">
                         <img src="https://image.tmdb.org/t/p/original/ykwNwrexm0TKZGbcKnntOxtEMeT.jpg" loading="lazy">
                         <div class="play-overlay"><span>▶</span></div>
@@ -116,15 +119,20 @@
     </div>
     <div id="player">
         <div class="p-bar"><span id="p-t"></span><button class="btn-c" onclick="closeP()">CERRAR ✕</button></div>
-        <iframe id="ifr" allowfullscreen></iframe>
+        <iframe id="ifr" allowfullscreen src=""></iframe>
     </div>
     <script>
         function play(t, u) {
             document.getElementById('p-t').innerText = t;
             document.getElementById('ifr').src = u;
             document.getElementById('player').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-        function closeP() { document.getElementById('player').classList.remove('active'); document.getElementById('ifr').src = ''; }
+        function closeP() {
+            document.getElementById('player').classList.remove('active');
+            document.getElementById('ifr').src = "";
+            document.body.style.overflow = 'auto';
+        }
     </script>
 </body>
 </html>
